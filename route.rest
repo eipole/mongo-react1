@@ -1,0 +1,21 @@
+GET http://localhost:3000/todos
+
+
+###
+
+POST http://localhost:3000/todos
+Content-Type: application/json
+
+{
+  "name":"teine tudu kuup"
+}
+
+######
+
+@_id =  6030ee019cccf71902b38a42
+PATCH http://localhost:3000/todos/{{_id}}
+Content-Type: application/json
+
+{
+  "completed": "true"
+}

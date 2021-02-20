@@ -1,7 +1,6 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config()
 }
-
 const express = require("express")
 const app = express()
 const port = process.env.PORT || 3000
@@ -25,7 +24,7 @@ mongoose.connection.on("error", function (err) {
   console.log("Could not connect to mongo server!")
   return console.log(err)
 })
-
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 const todoRouter = require("./routes/todos")
 app.use("/todos", todoRouter)

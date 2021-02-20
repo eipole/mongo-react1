@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const Todo = require("../models/todos")
+const Todo = require("../models/todomodel")
 
 // Getting all
 router.get("/", async (req, res) => {
@@ -18,7 +18,8 @@ router.get("/:id", getTodo, (req, res) => {
 //Creating one. Todo = todos on db
 router.post("/", async (req, res) => {
   const todo = new Todo({
-    name: req.body.name
+    name: req.body.name,
+    completed: req.body.completed
   })
   try {
     const newTodo = await todo.save()
