@@ -20,6 +20,20 @@ mongoose.connection.on("open", function (ref) {
   console.log("Connected to mongo server.")
 })
 
+app.use(function (req, res, next) {
+  // req.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Origin", "http://localhost:3006")
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  )
+  res.header(
+    "Access-Control-Allow-Methods",
+    "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+  )
+  next()
+})
+
 mongoose.connection.on("error", function (err) {
   console.log("Could not connect to mongo server!")
   return console.log(err)

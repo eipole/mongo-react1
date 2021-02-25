@@ -39,6 +39,7 @@ router.patch("/:id", getTodo, async (req, res) => {
   try {
     const updatedTodos = await res.todo.save()
     res.json(updatedTodos)
+    console.log("siin on", updatedTodos)
   } catch (err) {
     res.status(400).json({ message: err.message })
   }
@@ -59,7 +60,7 @@ async function getTodo(req, res, next) {
   try {
     todo = await Todo.findById(req.params.id)
     if (todo == null) {
-      return res.status(404).json({ message: "Cannot find subscriber" })
+      return res.status(404).json({ message: "Cannot find todo status 404" })
     }
   } catch (err) {
     return res.status(500).json({ message: err.message })

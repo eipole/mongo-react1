@@ -7,15 +7,22 @@ POST http://localhost:3000/todos
 Content-Type: application/json
 
 {
-  "name":"teine tudu kuup"
+  "name":"siuke tydy"
 }
 
 ######
-
-@_id =  6030ee019cccf71902b38a42
+@_id = 6036aa99c50a6521fd3b1154
 PATCH http://localhost:3000/todos/{{_id}}
 Content-Type: application/json
 
 {
   "completed": "true"
 }
+
+
+#############
+@_id =   60356ae3c6ecea0700258af3
+DELETE http://localhost:3000/todos/{{_id}}
+
+
+################
