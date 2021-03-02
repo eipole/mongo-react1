@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
   }
 })
 // Updating One
-router.patch("/:id", getTodo, async (req, res) => {
+router.put("/:id", getTodo, async (req, res) => {
   if (req.body.name != null) {
     res.todo.name = req.body.name
   }
@@ -39,7 +39,6 @@ router.patch("/:id", getTodo, async (req, res) => {
   try {
     const updatedTodos = await res.todo.save()
     res.json(updatedTodos)
-    console.log("siin on", updatedTodos)
   } catch (err) {
     res.status(400).json({ message: err.message })
   }

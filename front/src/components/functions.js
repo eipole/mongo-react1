@@ -1,4 +1,4 @@
-const URLEN = "http://localhost:3000/todos/"
+const URLEN = "http://localhost:5000/todos/"
 
 export async function fetchData(func) {
   try {
@@ -28,7 +28,7 @@ export async function postData(item) {
 
 export async function deleteTodo(id) {
   try {
-    const response = await fetch(URLEN + id, {
+    const response = await fetch(`${URLEN}${id}`, {
       method: "delete"
     })
     return response.json()
@@ -39,13 +39,26 @@ export async function deleteTodo(id) {
 
 export async function toggleTodo(id, completed) {
   try {
+    const response = await fetch(`${URLEN}${id}`, {
+      method: "put",
+      headers: new Headers({
+        "Content-Type": "application/json"
+      }),
+      body: JSON.stringify({ completed: !completed })
+    })
+    return response.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+/* export async function toggleTodo(id, completed) {
+  try {
     const response = await fetch(URLEN + id, {
-      // mode: "cors",
       method: "patch",
       headers: new Headers({
         "Content-Type": "application/json"
       }),
-      // options
       body: JSON.stringify({ completed: completed })
     })
 
@@ -53,4 +66,4 @@ export async function toggleTodo(id, completed) {
   } catch (error) {
     console.log(error)
   }
-}
+} */

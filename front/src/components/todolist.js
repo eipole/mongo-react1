@@ -13,15 +13,16 @@ function TodoList() {
     <div>
       <TodoForm setAllTodos={setAllTodos} />
       <ul>
-        {allTodos.map(({ _id, name, completed, addedDate }) => (
+        {allTodos.map((elem) => (
           <TodoItem
-            key={_id}
-            name={name}
-            completed={completed}
-            date={addedDate}
-            id={_id}
+            key={elem._id}
+            name={elem.name}
+            completed={elem.completed}
+            date={elem.addedDate}
+            id={elem._id}
             allTodos={allTodos}
             setAllTodos={setAllTodos}
+            // completelem={elem}
           />
         ))}
       </ul>

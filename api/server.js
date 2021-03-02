@@ -3,7 +3,23 @@ if (process.env.NODE_ENV !== "production") {
 }
 const express = require("express")
 const app = express()
+const cors = require("cors")
 const port = process.env.PORT || 3000
+
+app.use(cors())
+app.options("*", cors())
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*")
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  )
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+  )
+  next()
+})
 
 const mongoose = require("mongoose")
 const mongoDB = process.env.DATABASE_URL
@@ -20,20 +36,6 @@ mongoose.connection.on("open", function (ref) {
   console.log("Connected to mongo server.")
 })
 
-app.use(function (req, res, next) {
-  // req.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Origin", "http://localhost:3006")
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  )
-  res.header(
-    "Access-Control-Allow-Methods",
-    "POST, GET, OPTIONS, DELETE, PUT, PATCH"
-  )
-  next()
-})
-
 mongoose.connection.on("error", function (err) {
   console.log("Could not connect to mongo server!")
   return console.log(err)
@@ -47,3 +49,30 @@ app.use("/todos", todoRouter)
 app.listen(port, function () {
   console.log("jookseb " + port)
 })
+/* app.use(function (req, res, next) {
+  // req.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  )
+  res.header(
+    "Access-Control-Allow-Methods",
+    "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+  )
+  next()
+}) */
+/* app.use(function (req, res, next) {
+  // req.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  )
+  res.header(
+    "Access-Control-Allow-Methods",
+    "POST, GET, OPTIONS, DELETE, PUT, PATCH"
+  )
+  next()
+})
+ */
